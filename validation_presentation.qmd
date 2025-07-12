@@ -51,7 +51,7 @@ format:
 revealjs-plugins:
   - confetti
   - pointer
-  - spotlight
+  # - spotlight
   - quiz
 filters:
   - stamp
