@@ -665,6 +665,14 @@ To ensure the health of these valuable stocks and support the blue economy, mana
 
 ## {{< bi people-fill color=white size=12.1rem  >}} Asante Sana! {background-image="assets/photorealistic-wild-tuna-day-celebration_se_web.jpg" background-size="cover" background-opacity="0.6" transition="slide" .center}
 
+```{r}
+#| eval: false
+qrcode::qr_code('https://lugoga.github.io/tuna_stock25/') |> qrcode::generate_svg('validation/presentationAccess.svg')
+
+```
+
+![](presentationAccess.svg)
+
 
 
 <!-- ## Stock Status vs. Management Targets {.scrollable transition="slide" .center}
