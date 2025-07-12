@@ -1,0 +1,86 @@
+/*-- scss:defaults --*/
+
+// Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+// Font Variables
+$font-family-sans-serif: 'Lato', sans-serif;
+$presentation-heading-font: 'Lato', sans-serif;
+$presentation-font-size-root: 32px;
+
+// Color Variables
+$primary-color: #003262; // A professional dark blue
+$secondary-color: #0366fc; // A brighter blue for accents
+$text-color: #333333;
+$presentation-heading-color: $primary-color;
+$presentation-link-color: $secondary-color;
+
+/*-- scss:rules --*/
+
+// General body and slide styling
+.reveal {
+  font-family: $font-family-sans-serif;
+  color: $text-color;
+}
+
+// Enhance heading styles
+h1, h2, h3 {
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+h1 {
+  font-weight: bold;
+}
+
+h2, h3 {
+  font-weight: 700;
+}
+
+// Specific styling for the title slide for better readability over the image
+.title-slide {
+  h1, h2, .author, .institute, .date {
+    color: #FFFFFF; // White text for contrast
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8); // Enhanced shadow for more depth
+    -webkit-text-stroke: 1px #000000; // Adds a black stroke for definition
+    paint-order: stroke fill; // Ensures stroke is behind the fill
+  }
+
+  h1 { // Title
+    font-size: 2.5em !important;
+    font-weight: 900 !important; // Make title extra bold
+  }
+
+  h2 { // Subtitle
+    font-size: 1.2em !important;
+    font-style: italic;
+    font-weight: 700 !important; // Make subtitle bold
+  }
+}
+
+// Style the footer
+.reveal .footer {
+  color: $primary-color;
+  font-size: 0.5em;
+}
+
+// A universal style for presentation images
+.styled-img {
+  border: 3px solid #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  background-color: #FFFFFF;
+}
+
+// Style for highlighting specific text, like countries
+.highlight-text {
+  color: #c70039; // A strong, distinct red
+  font-weight: 700; // Make it bold to stand out
+}
+
+// Zoom effect on hover for images
+.hover-zoom {
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.05);
+  }
+}

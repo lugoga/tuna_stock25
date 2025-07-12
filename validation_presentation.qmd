@@ -1,0 +1,603 @@
+---
+title: "The State of Tuna Stock in TANZANIA"
+subtitle: 'WHERE ARE WE?'
+author: 
+  - Rushingisha George
+  - Masumbuko Semba
+  - Mathew Silas
+  - Yussuf Salim 
+institute: 
+  - TAFIRI
+  - Mandela
+  - DSFA
+  - ZAFIRI
+date: '2025-07-14'
+format:
+  revealjs: 
+    extra-dependencies:
+      - "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    quiz: 
+      checkKey: 'a'
+      #resetKey: 'q'
+      #shuffleKey: 't'
+      allowNumberKeys: true
+      disableOnCheck: false
+      disableReset: false
+      shuffleOptions: true
+      includeScore: false
+    scss: styles.scss
+    theme: sky
+    slide-number: true
+    # background-image: "images/bg_ngalawa_web.png"
+    # background-size: cover
+    # background-position: left
+    # chalkboard: 
+    #   buttons: false
+    preview-links: auto
+    # logo: "logo/the-nature-conservancy.png" # Example logo
+    # css: styles.css
+    footer: "Tuna Stock Validation | ZANZIBAR | July 14, 2025"
+    title-slide-attributes:
+      data-background-image: "assets/photorealistic-wild-tuna-day-celebration.jpg"
+      data-background-size: cover
+      data-background-color: "rgba(0, 0, 0, 1.0)"
+    confetti:
+      particleCount: 350
+      angle: 90
+      spread: 360
+      startVelocity: 25
+      gravity: 0.65
+      drift: 0
+      ticks: 400
+      colors: ["#0366fc", "#f54281", "#1fd14f"]
+      scalar: 0.7
+revealjs-plugins:
+  - confetti
+  - pointer
+  # - spotlight
+  - quiz
+
+embed-resources: true
+theme: serif
+highlight-style: ayu-mirage
+code-line-numbers: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+
+```{r}
+require(tidyverse)
+require(gt)
+require(tidyplots)
+require(plotthis)
+require(highcharter)
+
+```
+
+
+
+
+## **Agenda** {.scrollable .center background-image="assets/flying_tuna.jpg" background-size="cover" background-opacity="0.4"  transition="slide" } 
+
+::: incremental
+
+1.  **Introduction & Objectives**
+2.  **Approach**
+    -   LBSPR Model
+    -  Assumptions
+    -  LW Data 
+3.  **Stock Status by Species**
+    <!-- -   Yellowfin Tuna
+    -   Skipjack Tuna
+    -   Bigeye Tuna -->
+4.  **Overall Findings & Comparative Summary**
+5.  **Management Recommendations & Conclusion**
+6.  **Discussions**
+
+:::
+
+
+
+
+# INTRODUCTION
+
+## Stock Assessment Report 2024 {.scrollable transition="slide" .center}
+
+::: {.columns}
+::: {.column width="50%"}
+![](assets/cover_stock2024_1.png){.styled-img .img-fluid .float-end .ms-4 .mb-4 width="100%" style="transform: rotate(-3deg);"}
+:::
+::: {.column width="50%"}
+![](assets/cover_stock2024_2.png){.styled-img .img-fluid .rounded-4 .mb-4 style="transform: rotate(-3deg);"}
+:::
+:::
+
+## Stock Assessment Report 2025 {.scrollable transition="slide" .center}
+
+::: {.columns}
+::: {.column width="50%"}
+![](assets/coverpage1.png){.styled-img .img-fluid .float-end .ms-4 .mb-4 width="100%" style="transform: rotate(3deg);"}
+:::
+::: {.column width="50%"}
+![](assets/coverpage2.png){.styled-img .img-fluid .rounded-4 .mb-4 style="transform: rotate(3deg);"}
+:::
+:::
+
+
+## Objectives {.scrollable transition="slide" .center}
+
+For Yellowfin, Bigeye, and Skipjack tuna.
+
+::: incremental
+
+1. Estimate **key biological and exploitation reference points** (e.g., size at maturity, growth rates, mortality) for Yellowfin, Bigeye, and Skipjack tuna.
+1. Assess the **current stock** using the Length-Based Spawning Potential Ratio (LBSPR) model.
+1. **Identify and map** the spatial distribution of fishing intensity 
+
+:::
+
+# Approach
+
+## Theorem- LBSPR Model {.scrollable transition="slow" .center}
+
+
+Length-Based Spawning Potential Ratio (LBSPR)
+
+$$
+\begin{align}
+SPR &= \frac{\text{Fished}}{\text{Unfished}} \\
+    &= \frac{\sum_{L} \phi(L) \cdot F(L)}{\sum_{L} \phi_0(L) \cdot F(L)}
+\end{align}
+$$
+
+
+## Assumptions {.scrollable transition="slide" .center}
+
+::: incremental
+
+1.  **Unit Stock**: The populations are treated as single, self-contained stocks for this assessment.
+2.  **Representative Sampling**: The data collected from the artisanal and industrial fisheries are representative.
+3.  **Equilibrium State**: The fishery and the underlying population are assumed to be in a state of equilibrium.
+4.  **Closed Population**: The stocks are considered demographically closed, with negligible immigration or emigration during the assessment period.
+:::
+
+
+## Length and Weight Data {.scrollable transition="slide" .center}
+
+::: {.columns}
+::: {.column width="40%"}
+**Neritic waters**
+
+Data from the neritic zone were sourced from both TAFIRI and DSFA
+
+**EEZ**
+
+Data from Exclusive Economic Zone were sourced from DSFA
+:::
+::: {.column width="60%"}
+![](assets/sampling_sites.png){.img-fluid .rounded-4 .shadow-lg .border .border-1 .border-success .mb-4 style="transform: rotate(3deg);"}
+:::
+:::
+
+
+## Fishing grounds {.scrollable transition="slide" .center}
+
+```{r}
+
+read_csv('data/neritifc_dsfa.csv') |>  
+   group_by(landing_site) |> 
+  distinct(fishing_ground) |> 
+  summarise(gear = paste(fishing_ground, collapse = ', ')) |> 
+  ungroup() |> 
+  filter(!landing_site == 'Other') |> 
+  gt() |> 
+  tab_options(data_row.padding = px(5), table.font.size = '18pt') |> 
+  cols_label(landing_site~ 'Landing sites', gear ~ 'Fishing ground') |> 
+  opt_interactive(
+    use_search = TRUE,
+    # use_filters = TRUE,
+    use_resizers = TRUE,
+    use_highlight = TRUE,
+    use_compact_mode = TRUE,
+    use_text_wrapping = TRUE,
+    use_page_size_select = F
+  )
+
+```
+
+## Sampling months {.scrollable transition="slide" .center}
+
+```{r}
+tuna_neritic_clean = read_csv('data/tafiri_dsfa_tuna_combined_neritic.csv')
+
+tuna_neritic_clean = tuna_neritic_clean |> 
+    # distinct(landing_site) |> pull()
+    mutate(
+        landing_site = if_else(landing_site == "Kunduchi Pwani", "Kunduchi", landing_site),
+        english_name = str_remove_all(english_name, ' Tuna'),
+        source = if_else(is.na(tl), 'DSFA', 'TAFIRI')
+        ) 
+
+```
+
+
+```{r}
+
+tuna_neritic_clean |> 
+    filter(!is.na(fishing_date)) |> 
+    mutate(months = lubridate::month(fishing_date, label = TRUE, abbr = TRUE)) |> 
+    janitor::tabyl(english_name, months) |> 
+    janitor::adorn_totals(where = c('row', 'col'), na.rm = T, fill = '-') |> janitor::adorn_percentages() |> 
+    as_tibble() |> 
+    select(-14) |> 
+    gt()|> 
+    tab_options(latex.use_longtable = TRUE, data_row.padding = px(5), table.font.size = '18pt') |> 
+    fmt_missing(columns = everything(), missing_text = '-') |> 
+    fmt_number(columns = everything(), decimals = 1)  |> 
+    fmt_percent(columns = 2:13, decimals = 1) |> 
+    data_color(columns = 2:13, direction = 'row', palette = 'Reds', method = 'factor') |> 
+    cols_label(english_name ~ 'Tuna')|> 
+  opt_interactive(
+    use_search = TRUE,
+    # use_filters = TRUE,
+    use_resizers = TRUE,
+    use_highlight = TRUE,
+    use_compact_mode = TRUE,
+    use_text_wrapping = TRUE,
+    use_page_size_select = F
+  )
+
+```
+
+
+## Length and Weight Data...{.scrollable transition="slide" .center}
+
+
+```{r}
+set.seed(125)
+
+tuna_neritic_clean |> 
+    filter(!is.na(fishing_date) &!is.na(wt)) |> 
+    select(-c(fishing_ground, area, group)) |> 
+    mutate(fishing_date = month(fishing_date, abbr = T, label = T)) |> 
+    select(-scientific_name,-source) |> 
+    group_by(landing_site) |> 
+    sample_n(size = 80, replace = TRUE) |> 
+    ungroup() |> 
+    gt() |> 
+  tab_options(data_row.padding = px(5), table.font.size = '18pt') |> 
+  tab_spanner(columns = 4:5, label = "Length (cm)") |> 
+  #  tab_spanner(columns = 3:4, label = "Name") |> 
+  fmt_number(columns = everything(), decimals = 1) |> 
+  fmt_missing(columns = everything(), missing_text = '-') |> 
+  cols_label(
+    landing_site ~ "Landing site",
+    fishing_date ~ 'Month',
+    english_name~ 'English',
+    # scientific_name ~ 'Scientific',
+    tl ~ md('Total'),
+    fl ~ md('Focal'),
+    wt ~ md('Weight (kg)')
+    ) |> 
+  # cols_width(landing_site ~ px(100)) |> 
+  # tab_footnote(footnote = 'Total Length measurements are only available from landing sites monitored with TAFIRI and absent for landing sites from DSFA', locations = cells_column_labels(columns = tl))|> 
+  # tab_footnote(footnote = 'Focal length and weight measurments from DSFA are recorded as integer (without decimal) while those from TAFIRI as numeric (with decimals)', locations = cells_column_labels(columns = tl:wt)) |> 
+  opt_interactive(
+    use_search = TRUE,
+    # use_filters = TRUE,
+    use_resizers = TRUE,
+    use_highlight = TRUE,
+    use_compact_mode = TRUE,
+    use_text_wrapping = FALSE,
+    use_page_size_select = TRUE
+  ) |> 
+    # data_color(columns = 4, direction = 'column', method = 'factor', palette = 'Purples')|> 
+    # data_color(columns = 5, direction = 'column', method = 'factor', palette = 'Blues')|> 
+    data_color(columns = 4:6, direction = 'column', method = 'factor', palette = 'Reds')
+```
+
+# Reference points & Stock
+
+# Yellowfin Tuna (*Thunnus albacares*)
+
+## Juvenile and adult {.scrollable transition="slide" .center}
+
+
+
+![](../graphics_plots/yellowfin_corrected_juvenile_adults_maturity.png)
+
+
+
+## Reference Points {.scrollable transition="slide" .center}
+
+```{r}
+
+yellowfin_data <- tibble::tribble(
+  ~Parameter, ~Value, ~Description,
+  "$L_{inf}$ (cm)", 161.28, "Asymptotic length, theoretical maximum length fish can reach.",
+  "K (year<sup>-1</sup>)", 0.10, "Von Bertalanffy growth coefficient",
+  "M/K Ratio", 1.43, "Ratio of natural mortality (M) to the growth coefficient (K).",
+  "$L_{50}$ (cm)", 92.29, "Length at which 50% of the fish are sexually mature.",
+  "$L_{95}$ (cm)", 103.36, "Length at which 95% of the fish are sexually mature.",
+  "$SL_{50}$ (cm)", 59.52, "Length at which 50% of the fish are vulnerable to the fishing gear.",
+  "$SL_{95}$ (cm)", 74.20, "Length at which 95% of the fish are vulnerable to the fishing gear.",
+  "F/M Ratio", 0.80, "Ratio of fishing mortality to natural mortality",
+  "SPR", 0.29, "Spawning Potential Ratio",
+  "Z (year<sup>-1</sup>)", 0.27, "Total mortality rate (Z = F + M).",
+  "$t_{50}$ (years)", 4.61, "Age at which 50% of the fish are sexually mature.",
+  "$t_{95}$ (years)", 6.16, "Age at which 95% of the fish are sexually mature.",
+  "Yield (kg)", 927723024.28, "Estimated total annual yield from the fishery.",
+  "YPR (kg)", 130246.10, "Yield Per Recruit, expected yield from an average recruit.",
+  "SSB (kg)", 799846689.27, "Current Spawning Stock Biomass."
+#   "$SSB_0$ (kg)", 381530.20, "Unfished Spawning Stock Biomass"
+)
+
+yellowfin_data |>
+    slice(1:5, 10:12,6:8) |> 
+    mutate(Reference = c(rep('Biological',7), rep('Exploitation',4))) |> 
+  gt(groupname_col = 'Reference') |>
+  fmt_number(columns = "Value", decimals = 1) |>
+  fmt_markdown(columns = "Parameter") |> 
+  cols_width(
+    Parameter ~ px(100),
+    Value ~ px(100),
+    Description ~ px(400)
+  ) |>
+  cols_align(align = "left", columns = "Description") |>
+  tab_options(
+    table.font.size = '18pt',
+    data_row.padding = px(4)
+  )|>
+    cols_align(align = "center", columns = 1:2) |> 
+    tab_style(style = cell_text(align = "center"), locations = cells_body(columns = 1:2))|> 
+  opt_interactive(
+    use_search = TRUE,
+    # use_filters = TRUE,
+    use_resizers = TRUE,
+    use_highlight = TRUE,
+    use_compact_mode = TRUE,
+    use_text_wrapping = T,
+    use_page_size_select = TRUE
+  ) 
+
+```
+
+## Yield and Biomass {.scrollable transition="slide" .center}
+
+![](../graphics_plots/yellowfin_stock.png)
+
+
+
+## Summary {.scrollable transition="slide" .center}
+
+*   **SPR: 29%**
+    *   Indicates the stock is within the recommended range.
+    *   This is an improvement over the 2024 report's estimate of 13%, but still well below the 40% target.
+
+*   **Critical Issue: Juvenile Catch**
+    *   Maturity Size ($L_{50}$): **92.3 cm**
+    *   Capture Size ($SL_{50}$): **59.5 cm**
+    *   This large gap shows that fishing pressure is heavily concentrated on immature fish, severely impacting the stock's ability to replenish itself.
+
+
+# Skipjack Tuna (*Katsuwonus pelamis*)
+
+## Juvenile and adult {.scrollable transition="slide" .center}
+
+
+
+![](../graphics_plots/skipjack_corrected_juvenile_adults_maturity.png)
+
+
+
+## Reference Points {.scrollable transition="slide" .center}
+
+```{r}
+
+
+skipjack_data <- tibble::tribble(
+  ~Parameter, ~Value, ~Description,
+  "$L_{inf}$ (cm)", 70.48, "Asymptotic length, theoretical maximum length fish can reach.",
+  "K (year<sup>-1</sup>)", 0.44, "Von Bertalanffy growth coefficient",
+  "M/K Ratio", 1.26, "Ratio of natural mortality (M) to the growth coefficient (K).",
+  "$L_{50}$ (cm)", 59.85, "Length at which 50% of the fish are sexually mature.",
+  "$L_{95}$ (cm)", 64.26, "Length at which 95% of the fish are sexually mature.",
+  "$SL_{50}$ (cm)", 50.24, "Length at which 50% of the fish are vulnerable to the fishing gear.",
+  "$SL_{95}$ (cm)", 54.39, "Length at which 95% of the fish are vulnerable to the fishing gear.",
+  "F/M Ratio", 0.80, "Ratio of fishing mortality (F) to natural mortality (M)",
+  "SPR", 0.33, "Spawning Potential Ratio",
+  "Z (year<sup>-1</sup>)", 0.57, "Total mortality rate (Z = F + M).",
+  "$t_{50}$ (years)", 2.84, "Age at which 50% of the fish are sexually mature.",
+  "$t_{95}$ (years)", 3.36, "Age at which 95% of the fish are sexually mature.",
+  "Yield (kg)", 103288857.59, "Estimated total annual yield from the fishery.",
+  "YPR (kg)", 13725.03, "Yield Per Recruit, expected yield from an average recruit.",
+  "SSB (kg)", 50251533.84, "Current Spawning Stock Biomass."
+#   "$SSB_0$ (kg)", 20446.38, "Unfished Spawning Stock Biomass"
+)
+
+skipjack_data |>
+    slice(1:5, 11:12,10,6:8) |> 
+    mutate(Reference = c(rep('Biological',7), rep('Exploitation',4))) |> 
+  gt(groupname_col = 'Reference') |>
+  fmt_number(columns = "Value", decimals = 1) |>
+  fmt_markdown(columns = "Parameter") |> 
+  cols_width(
+    Parameter ~ px(100),
+    Value ~ px(100),
+    Description ~ px(400)
+  ) |>
+  cols_align(align = "left", columns = "Description") |>
+  tab_options(
+    table.font.size = '18pt',
+    data_row.padding = px(4)
+  ) |>
+    cols_align(align = "center", columns = 1:2) |> 
+    tab_style(style = cell_text(align = "center"), locations = cells_body(columns = 1:2)) |> 
+  opt_interactive(
+    use_search = TRUE,
+    # use_filters = TRUE,
+    use_resizers = TRUE,
+    use_highlight = TRUE,
+    use_compact_mode = TRUE,
+    use_text_wrapping = T,
+    use_page_size_select = TRUE
+  ) 
+```
+
+## Yield and Biomass {.scrollable transition="slide" .center}
+
+![](../graphics_plots/skipjack_stock.png)
+
+
+## Summary {.scrollable transition="slide" .center}
+
+*   **SPR: 33% (New Baseline)**
+    *   This is the first formal assessment for Skipjack in this series.
+    *   The 33% SPR suggests the stock is within the sustainable level.
+
+*   **Concern: Juvenile Catch**
+    *   Maturity Size ($L_{50}$): **59.9 cm**
+    *   Capture Size ($SL_{50}$): **50.2 cm**
+    *   Like the other species, a substantial portion of the catch consists of immature fish that have not had a chance to spawn.
+
+
+
+
+# Bigeye Tuna (*Thunnus obesus*)
+
+## Juvenile and adult {.scrollable transition="slide" .center}
+
+
+
+![](../graphics_plots/bigeye_corrected_juvenile_adults_maturity.png)
+
+
+
+## Reference Points {.scrollable transition="slide" .center}
+
+```{r}
+
+
+bigeye_data <- tibble::tribble(
+  ~Parameter, ~Value, ~Description,
+  "$L_{inf}$ (cm)", 96.98, "Asymptotic length, theoretical maximum length fish can reach.",
+  "K (year<sup>-1</sup>)", 0.46, "Von Bertalanffy growth coefficient",
+  "M/K Ratio", 1.12, "Ratio of natural mortality (M) to the growth coefficient (K).",
+  "$L_{50}$ (cm)", 81.95, "Length at which 50% of the fish are sexually mature.",
+  "$L_{95}$ (cm)", 99.46, "Length at which 95% of the fish are sexually mature.",
+  "$SL_{50}$ (cm)", 62.67, "Length at which 50% of the fish are vulnerable to the fishing gear.",
+  "$SL_{95}$ (cm)", 69.11, "Length at which 95% of the fish are vulnerable to the fishing gear.",
+  "F/M Ratio", 0.80, "Ratio of fishing mortality (F) to natural mortality (M)",
+  "SPR", 0.33, "Spawning Potential Ratio",
+  "Z (year<sup>-1</sup>)", 0.65, "Total mortality rate (Z = F + M).",
+  "$t_{50}$ (years)", 2.26, "Age at which 50% of the fish are sexually mature.",
+  "$t_{95}$ (years)", 2.71, "Age at which 95% of the fish are sexually mature.",
+  "Yield (kg)", 385950126.56, "Estimated total annual yield from the fishery.",
+  "YPR (kg)", 51394.52, "Yield Per Recruit, expected yield from an average recruit.",
+  "SSB (kg)", 186897621.79, "Current Spawning Stock Biomass."
+#   "$SSB_0$ (kg)", 76539.68, "Unfished Spawning Stock Biomass"
+)
+
+bigeye_data |>
+    slice(1:5, 11:12,10,6:8) |> 
+    mutate(Reference = c(rep('Biological',7), rep('Exploitation',4))) |> 
+  gt(groupname_col = 'Reference') |>
+  fmt_number(columns = "Value", decimals = 1) |>
+  fmt_markdown(columns = "Parameter") |> 
+  # cols_width(
+  #   Parameter ~ px(100),
+  #   Value ~ px(100),
+  #   Description ~ px(400)
+  # ) |>
+  cols_align(align = "left", columns = "Description") |>
+  tab_options(
+    table.font.size = '18pt',
+    data_row.padding = px(4)
+  ) |> 
+  opt_interactive(
+    use_search = TRUE,
+    # use_filters = TRUE,
+    use_resizers = TRUE,
+    use_highlight = TRUE,
+    use_compact_mode = TRUE,
+    use_text_wrapping = T,
+    use_page_size_select = TRUE
+  ) |>
+    cols_align(align = "center", columns = 1:2) |> 
+    tab_style(style = cell_text(align = "center"), locations = cells_body(columns = 1:2))
+
+```
+
+## Yield and Biomass {.scrollable transition="slide" .center}
+
+![](../graphics_plots/bigeye_stock.png)
+
+
+## Summary {.scrollable transition="slide" .center}
+
+*   **SPR: 33%**
+    *   Indicates the stock is within the  sustainable fishing level.
+    *   Represents a significant improvement in estimated status from the 2024 report's 14% SPR.
+
+*   **Concern: Juvenile Catch**
+    *   Maturity Size ($L_{50}$): **82.0 cm**
+    *   Capture Size ($SL_{50}$): **62.7 cm**
+    *   While less severe than for Yellowfin, the capture of immature individuals remains a key driver of stock pressure.
+
+
+
+# Key Finding
+
+## Overall Key Finding {.scrollable transition="slide" .center}
+
+
+**All three assessed tuna stocks are within the recommended range of sustainable levels.**
+
+*   The Spawning Potential Ratio (SPR) for all species is **above 20% but below the 40% target reference point**.
+
+*   The primary driver is the **harvest of immature fish**: The size at which fish are caught ($SL_{50}$) is consistently and significantly lower than the size at which they mature ($L_{50}$).
+
+
+## Stock Status: A Comparative Summary {.scrollable transition="slide" .center}
+
+The consistent gap between size at maturity ($L_{50}$) and size at capture ($SL_{50}$) is a major red flag.
+
+| Species | Spawning Potential (SPR) | Size at Maturity ($L_{50}$) | Size at Capture ($SL_{50}$) | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **Yellowfin** | **29%** | 92.3 cm | **59.5 cm** | **Sustainable** |
+| **Bigeye** | **33%** | 82.0 cm | **62.7 cm** | Sustainable |
+| **Skipjack** | **33%** | 59.9 cm | **50.2 cm** | Sustainable |
+
+<br>
+
+::: footer
+An SPR range between 20% and 40% is the recommended.
+:::
+
+
+
+## Recommendations {background-image="assets/flying_tuna.jpg" background-size="cover" background-opacity="0.2" .scrollable  transition="slide" .center} 
+
+1.  **Protect Juvenile Fish (Highest Priority):**
+    *   Establish and enforce **minimum size limits** for landed tuna.
+    *   Implement **gear selectivity** measures (e.g., mesh size regulations).
+    *   Consider **spatial or temporal closures** to protect nursery grounds.
+
+2.  **Enhance Data & Monitoring:**
+    *   Improve data collection from all fishery sectors (artisanal and industrial) to support robust, adaptive management.
+
+
+## Conclusion {background-image="assets/photorealistic-wild-tuna-day-celebration_se.jpg" background-size="cover" background-opacity="0.2" .scrollable  transition="slide" .center} 
+
+To ensure the health of these valuable stocks and support the blue economy, management must prioritize:
+
+*   **Protecting juvenile fish.**
+*   **Improving gear selectivity.**
+*   **Adopting a precautionary approach to control fishing effort.**
+
+
+## Asante Sana! {background-image="assets/photorealistic-wild-tuna-day-celebration_se.jpg" background-size="cover" background-opacity="0.6" transition="slide" .center} 
+
