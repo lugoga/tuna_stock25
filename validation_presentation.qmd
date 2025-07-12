@@ -33,7 +33,7 @@ format:
     header: Tuna Stock in the URT Waters
     # header-logo: images/reveal_logo.svg
     preview-links: auto
-    footer: "Tuna Stock Validation | ZANZIBAR | July 14, 2025"
+    footer: "Tuna Stock Validation | ZANZIBAR | July 13, 2025"
     title-slide-attributes:
       data-background-image: "assets/photorealistic-wild-tuna-day-celebration_web.jpg"
       data-background-size: cover
@@ -53,8 +53,8 @@ revealjs-plugins:
   - pointer
   # - spotlight
   - quiz
-filters:
-  - stamp
+# filters:
+#   - stamp
 
 embed-resources: true
 theme: serif
@@ -663,6 +663,51 @@ To ensure the health of these valuable stocks and support the blue economy, mana
 *   **Adopting a precautionary approach to control fishing effort.**
 
 
+
+# {{< bi bootstrap-reboot color=steelblue size=18.1rem  >}} Key Sobering Thoughts!!! 
+
+## What is a key assumption of the LBSPR model?{.quiz-question}
+
+- The population is rapidly growing
+- [The fishery is in equilibrium]{.correct}
+- Fishing only occurs in deep-sea waters
+- Data is globally applicable
+
+## What is the primary concern for tuna stocks?{.quiz-question}
+
+- Overfishing adults
+- Insufficient data
+- [Catching juvenile fish]{.correct}
+- Environmental factors
+
+## What is the sustainable Spawning Potential Ratio (SPR) range?{.quiz-question}
+
+- Below 20%
+- [20% to 40%]{.correct}
+- Above 40%
+- Above 10%
+
+## How did the Yellowfin SPR change from 2024 to 2025?{.quiz-question}
+
+- It decreased significantly
+- It remained the same
+- [It improved from 13% to 29%]{.correct}
+- It was not assessed in 2024
+
+## For which species is the gap between maturity size (L50) and capture size (SL50) the largest?{.quiz-question}
+
+- [Yellowfin Tuna]{.correct}
+- Bigeye Tuna
+- Skipjack Tuna
+- The gap is similar for all species
+
+## What is the HIGHEST priority management recommendation?{.quiz-question}
+
+- Enhance data collection
+- [Protect juvenile fish]{.correct}
+- Promote sustainable practices
+- Research migration patterns
+
 ## {{< bi people-fill color=white size=12.1rem  >}} Asante Sana! {background-image="assets/photorealistic-wild-tuna-day-celebration_se_web.jpg" background-size="cover" background-opacity="0.6" transition="slide" .center}
 
 ```{r}
@@ -718,5 +763,3 @@ highchart() |>
   hc_colors(c("#4575b4", "#4575b4", "#4575b4")) |> # Use a consistent color for bars
   hc_legend(enabled = FALSE)
 ```
-
-
