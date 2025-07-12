@@ -26,19 +26,16 @@ format:
       shuffleOptions: true
       includeScore: false
     scss: styles.scss
+    # css: styles.css
     theme: sky
     slide-number: true
-    # background-image: "images/bg_ngalawa_web.png"
-    # background-size: cover
-    # background-position: left
-    # chalkboard: 
-    #   buttons: false
+    logo: coat_OG_web.png
+    header: Tuna Stock in the URT Waters
+    # header-logo: images/reveal_logo.svg
     preview-links: auto
-    # logo: "logo/the-nature-conservancy.png" # Example logo
-    # css: styles.css
     footer: "Tuna Stock Validation | ZANZIBAR | July 14, 2025"
     title-slide-attributes:
-      data-background-image: "assets/photorealistic-wild-tuna-day-celebration.jpg"
+      data-background-image: "assets/photorealistic-wild-tuna-day-celebration_web.jpg"
       data-background-size: cover
       data-background-color: "rgba(0, 0, 0, 1.0)"
     confetti:
@@ -54,8 +51,10 @@ format:
 revealjs-plugins:
   - confetti
   - pointer
-  # - spotlight
+  - spotlight
   - quiz
+filters:
+  - stamp
 
 embed-resources: true
 theme: serif
@@ -66,6 +65,7 @@ execute:
   warning: false
   message: false
 ---
+
 
 
 ```{r}
@@ -80,22 +80,22 @@ require(highcharter)
 
 
 
-## **Agenda** {.scrollable .center background-image="assets/flying_tuna.jpg" background-size="cover" background-opacity="0.4"  transition="slide" } 
+## {{< bi alarm-fill color=red >}} **Agenda** {.scrollable .center background-image="assets/flying_tuna_web.jpg" background-size="cover" background-opacity="0.4"  transition="slide" } 
 
 ::: incremental
 
-1.  **Introduction & Objectives**
-2.  **Approach**
+1. {{< bi save color=red >}}  **Introduction & Objectives**
+2. {{< bi save color=yellow >}}   **Approach**
     -   LBSPR Model
     -  Assumptions
     -  LW Data 
-3.  **Stock Status by Species**
+3. {{< bi save color=blue >}}   **Stock Status by Species**
     <!-- -   Yellowfin Tuna
     -   Skipjack Tuna
     -   Bigeye Tuna -->
-4.  **Overall Findings & Comparative Summary**
-5.  **Management Recommendations & Conclusion**
-6.  **Discussions**
+4. {{< bi save color=green >}}   **Overall Findings & Comparative Summary**
+5.  {{< bi save color=orange >}}  **Management Recommendations & Conclusion**
+6.  {{< bi save color=purple >}}  **Discussions**
 
 :::
 
@@ -127,21 +127,25 @@ require(highcharter)
 :::
 
 
-## Objectives {.scrollable transition="slide" .center}
+## {{< bi ui-checks-grid color=steelblue size=8.1rem  >}} Objectives {.scrollable transition="slide" .center}
 
 For Yellowfin, Bigeye, and Skipjack tuna.
 
 ::: incremental
 
-1. Estimate **key biological and exploitation reference points** (e.g., size at maturity, growth rates, mortality) for Yellowfin, Bigeye, and Skipjack tuna.
-1. Assess the **current stock** using the Length-Based Spawning Potential Ratio (LBSPR) model.
-1. **Identify and map** the spatial distribution of fishing intensity 
+1. {{< bi clipboard2-data-fill color=steelblue >}} Estimate **key biological and exploitation reference points** (e.g., size at maturity, growth rates, mortality) for Yellowfin, Bigeye, and Skipjack tuna.
+1. {{< bi bar-chart-line-fill color=steelblue >}} Assess the **current stock** using the Length-Based Spawning Potential Ratio (LBSPR) model.
+1. {{< bi exclude color=steelblue >}} **Identify and map** the spatial distribution of fishing intensity 
 
 :::
 
+
+
+
+
 # Approach
 
-## Theorem- LBSPR Model {.scrollable transition="slow" .center}
+## {{< bi ui-checks-grid color=steelblue size=8.1rem  >}} Theorem- LBSPR Model {.scrollable transition="slow" .center}
 
 
 Length-Based Spawning Potential Ratio (LBSPR)
@@ -154,7 +158,7 @@ SPR &= \frac{\text{Fished}}{\text{Unfished}} \\
 $$
 
 
-## Assumptions {.scrollable transition="slide" .center}
+## {{< bi ui-checks-grid color=steelblue size=8.1rem  >}} Assumptions {.scrollable transition="slide" .center}
 
 ::: incremental
 
@@ -165,7 +169,7 @@ $$
 :::
 
 
-## Length and Weight Data {.scrollable transition="slide" .center}
+## {{< bi server color=purple >}}  Length and Weight Data {.scrollable transition="slide" .center}
 
 ::: {.columns}
 ::: {.column width="40%"}
@@ -183,7 +187,8 @@ Data from Exclusive Economic Zone were sourced from DSFA
 :::
 
 
-## Fishing grounds {.scrollable transition="slide" .center}
+
+## {{< bi globe-europe-africa color=green >}} Fishing grounds {.scrollable}
 
 ```{r}
 
@@ -208,7 +213,13 @@ read_csv('data/neritifc_dsfa.csv') |>
 
 ```
 
-## Sampling months {.scrollable transition="slide" .center}
+
+
+
+
+##  {{< bi calendar-date-fill color=steelblue >}} Sampling months {.scrollable}
+
+"The sampling spans all 12 months of 2024, ensuring comprehensive coverage. Data was collected consistently from January through December."
 
 ```{r}
 tuna_neritic_clean = read_csv('data/tafiri_dsfa_tuna_combined_neritic.csv')
@@ -253,7 +264,7 @@ tuna_neritic_clean |>
 ```
 
 
-## Length and Weight Data...{.scrollable transition="slide" .center}
+##  {{< bi sd-card-fill color=steelblue >}} Length and Weight Data...{.scrollable}
 
 
 ```{r}
@@ -299,11 +310,25 @@ tuna_neritic_clean |>
     data_color(columns = 4:6, direction = 'column', method = 'factor', palette = 'Reds')
 ```
 
+
+## {{< bi layers-fill color=steelblue >}} Length Frequencies for 2024{.scrollable}
+
+**Yellowfin tuna**
+![](../graphics_plots/yellowfin_lfq-01.png)
+
+**Skipjack tuna**
+![](../graphics_plots/skipjack_lfq.png)
+
+**Bigeye tuna**
+![](../graphics_plots/bigeye_lfq.png)
+
+
+
 # Reference points & Stock
 
 # Yellowfin Tuna (*Thunnus albacares*)
 
-## Juvenile and adult {.scrollable transition="slide" .center}
+## {{< bi mask color=steelblue size=8.1rem  >}} Juvenile and adult {.scrollable transition="slide" .center}
 
 
 
@@ -311,7 +336,7 @@ tuna_neritic_clean |>
 
 
 
-## Reference Points {.scrollable transition="slide" .center}
+## {{< bi mask color=steelblue size=8.1rem  >}} Reference Points {.scrollable}
 
 ```{r}
 
@@ -365,13 +390,13 @@ yellowfin_data |>
 
 ```
 
-## Yield and Biomass {.scrollable transition="slide" .center}
+## {{< bi mask color=steelblue size=8.1rem  >}} Yield and Biomass {.scrollable transition="slide" .center}
 
 ![](../graphics_plots/yellowfin_stock.png)
 
 
 
-## Summary {.scrollable transition="slide" .center}
+## {{< bi mask color=steelblue size=8.1rem  >}} Summary {.scrollable transition="slide" .center}
 
 *   **SPR: 29%**
     *   Indicates the stock is within the recommended range.
@@ -385,7 +410,7 @@ yellowfin_data |>
 
 # Skipjack Tuna (*Katsuwonus pelamis*)
 
-## Juvenile and adult {.scrollable transition="slide" .center}
+## {{< bi shield-fill-check color=steelblue size=8.1rem  >}} Juvenile and adult {.scrollable transition="slide" .center}
 
 
 
@@ -393,7 +418,7 @@ yellowfin_data |>
 
 
 
-## Reference Points {.scrollable transition="slide" .center}
+## {{< bi shield-fill-check color=steelblue size=8.1rem  >}} Reference Points {.scrollable}
 
 ```{r}
 
@@ -447,12 +472,12 @@ skipjack_data |>
   ) 
 ```
 
-## Yield and Biomass {.scrollable transition="slide" .center}
+## {{< bi shield-fill-check color=steelblue size=8.1rem  >}} Yield and Biomass {.scrollable transition="slide" .center}
 
 ![](../graphics_plots/skipjack_stock.png)
 
 
-## Summary {.scrollable transition="slide" .center}
+## {{< bi shield-fill-check color=steelblue size=8.1rem  >}} Summary {.scrollable transition="slide" .center}
 
 *   **SPR: 33% (New Baseline)**
     *   This is the first formal assessment for Skipjack in this series.
@@ -468,7 +493,7 @@ skipjack_data |>
 
 # Bigeye Tuna (*Thunnus obesus*)
 
-## Juvenile and adult {.scrollable transition="slide" .center}
+## {{< bi sign-turn-right-fill color=steelblue size=8.1rem  >}} Juvenile and adult {.scrollable transition="slide" .center}
 
 
 
@@ -476,7 +501,7 @@ skipjack_data |>
 
 
 
-## Reference Points {.scrollable transition="slide" .center}
+## {{< bi sign-turn-right-fill color=steelblue size=8.1rem  >}} Reference Points {.scrollable}
 
 ```{r}
 
@@ -531,12 +556,12 @@ bigeye_data |>
 
 ```
 
-## Yield and Biomass {.scrollable transition="slide" .center}
+## {{< bi sign-turn-right-fill color=steelblue size=8.1rem  >}} Yield and Biomass {.scrollable transition="slide" .center}
 
 ![](../graphics_plots/bigeye_stock.png)
 
 
-## Summary {.scrollable transition="slide" .center}
+## {{< bi sign-turn-right-fill color=steelblue size=8.1rem  >}} Summary {.scrollable transition="slide" .center}
 
 *   **SPR: 33%**
     *   Indicates the stock is within the  sustainable fishing level.
@@ -551,7 +576,7 @@ bigeye_data |>
 
 # Key Finding
 
-## Overall Key Finding {.scrollable transition="slide" .center}
+## {{< bi transparency color=steelblue size=8.1rem  >}} Overall Key Finding {.scrollable transition="slide" .center}
 
 
 **All three assessed tuna stocks are within the recommended range of sustainable levels.**
@@ -561,7 +586,7 @@ bigeye_data |>
 *   The primary driver is the **harvest of immature fish**: The size at which fish are caught ($SL_{50}$) is consistently and significantly lower than the size at which they mature ($L_{50}$).
 
 
-## Stock Status: A Comparative Summary {.scrollable transition="slide" .center}
+## {{< bi transparency color=steelblue size=8.1rem  >}} A Comparative Summary {.scrollable transition="slide" .center}
 
 The consistent gap between size at maturity ($L_{50}$) and size at capture ($SL_{50}$) is a major red flag.
 
@@ -579,25 +604,111 @@ An SPR range between 20% and 40% is the recommended.
 
 
 
-## Recommendations {background-image="assets/flying_tuna.jpg" background-size="cover" background-opacity="0.2" .scrollable  transition="slide" .center} 
+## {{< bi transparency color=steelblue size=8.1rem  >}} Harvesting Immature Fish {.scrollable transition="slide" .center}
 
+**The Core Problem:** the average size at capture is significantly smaller than the size at maturity.
+
+```{r}
+#| fig-height: 4
+
+size_data <- tibble(
+  Species = c("Yellowfin", "Bigeye", "Skipjack"),
+  `Size at Maturity (L50)` = c(92.3, 82.0, 59.9),
+  `Size at Capture (SL50)` = c(59.5, 62.7, 50.2)
+)
+
+highchart() |>
+  hc_chart(type = "column") |>
+  # hc_title(text = "Maturity vs. Capture Size") |>
+  # hc_subtitle(text = "Illustrating the gap between when fish can reproduce and when they are caught") |>
+  hc_xAxis(categories = size_data$Species) |>
+  hc_yAxis(title = list(text = "Fork Length (cm)")) |>
+  hc_plotOptions(column = list(dataLabels = list(enabled = TRUE, format = "{y} cm"), groupPadding = 0.1)) |>
+  hc_add_series(data = size_data$`Size at Maturity (L50)`, name = "Size at Maturity (L50)") |>
+  hc_add_series(data = size_data$`Size at Capture (SL50)`, name = "Size at Capture (SL50)") |>
+  hc_colors(c("#1a9850", "#f4a582")) |>
+  hc_tooltip(shared = TRUE, crosshairs = TRUE) |> 
+  hc_legend(align = 'right', verticalAlign = 'middle', layout = 'vertical')
+```
+
+
+
+## {{< bi transparency color=steelblue size=8.1rem  >}} Recommendations {background-image="assets/flying_tuna.jpg" background-size="cover" background-opacity="0.2" .scrollable  transition="slide" .center} 
+
+1.  <i class="bi bi-rulers"></i> **Protect Juvenile Fish (Highest Priority):**
+    <!-- *   <i class="bi bi-funnel-fill"></i> Implement **gear selectivity** measures (e.g., mesh size regulations). -->
+    *   <i class="bi bi-geo-alt-fill"></i> Consider **spatial or temporal closures** to protect nursery grounds.
+
+<!-- 
 1.  **Protect Juvenile Fish (Highest Priority):**
     *   Establish and enforce **minimum size limits** for landed tuna.
     *   Implement **gear selectivity** measures (e.g., mesh size regulations).
-    *   Consider **spatial or temporal closures** to protect nursery grounds.
+    *   Consider **spatial or temporal closures** to protect nursery grounds. -->
 
-2.  **Enhance Data & Monitoring:**
+2.  <i class="bi bi-clipboard2-data-fill"></i> **Enhance Data & Monitoring:**
     *   Improve data collection from all fishery sectors (artisanal and industrial) to support robust, adaptive management.
 
 
-## Conclusion {background-image="assets/photorealistic-wild-tuna-day-celebration_se.jpg" background-size="cover" background-opacity="0.2" .scrollable  transition="slide" .center} 
+
+<!-- 2.  **Enhance Data & Monitoring:**
+    *   Improve data collection from all fishery sectors (artisanal and industrial) to support robust, adaptive management. -->
+
+
+## {{< bi transparency color=steelblue size=8.1rem  >}} Conclusion {background-image="assets/photorealistic-wild-tuna-day-celebration_se_web.jpg" background-size="cover" background-opacity="0.2" .scrollable  transition="slide" .center} 
 
 To ensure the health of these valuable stocks and support the blue economy, management must prioritize:
 
-*   **Protecting juvenile fish.**
+*   **Protecting juvenile fish**.
 *   **Improving gear selectivity.**
 *   **Adopting a precautionary approach to control fishing effort.**
 
 
-## Asante Sana! {background-image="assets/photorealistic-wild-tuna-day-celebration_se.jpg" background-size="cover" background-opacity="0.6" transition="slide" .center} 
+## {{< bi people-fill color=white size=12.1rem  >}} Asante Sana! {background-image="assets/photorealistic-wild-tuna-day-celebration_se_web.jpg" background-size="cover" background-opacity="0.6" transition="slide" .center}
+
+
+
+<!-- ## Stock Status vs. Management Targets {.scrollable transition="slide" .center}
+
+All stocks are below the 40% target, placing them in the caution zone. -->
+
+```{r}
+#| fig-height: 6
+#| eval: false
+
+stock_data <- tibble(
+  Species = c("Yellowfin", "Bigeye", "Skipjack"),
+  SPR = c(0.29, 0.33, 0.33)
+)
+
+highchart() |>
+  hc_chart(type = "column") |>
+  hc_title(text = "Spawning Potential Ratio (SPR) by Species") |>
+  hc_subtitle(text = "All stocks are below the 40% target reference point") |>
+  hc_xAxis(categories = stock_data$Species, title = list(text = "Tuna Species")) |>
+  hc_yAxis(
+    title = list(text = "Spawning Potential Ratio (SPR)"),
+    max = 1,
+    plotLines = list(
+      list(label = list(text = "Target (40%)", style = list(color = "#333", fontWeight = "bold")),
+           color = "#1a9850", width = 2, value = 0.4, zIndex = 5, dashStyle = "shortdash"),
+      list(label = list(text = "Limit (20%)", style = list(color = "#333", fontWeight = "bold")),
+           color = "#d73027", width = 2, value = 0.2, zIndex = 5, dashStyle = "shortdash")
+    ),
+    plotBands = list(
+      list(from = 0, to = 0.2, color = "rgba(215, 48, 39, 0.2)", label = list(text = "Overfished Zone")),
+      list(from = 0.2, to = 0.4, color = "rgba(254, 224, 139, 0.3)", label = list(text = "Caution Zone")),
+      list(from = 0.4, to = 1, color = "rgba(26, 152, 80, 0.2)", label = list(text = "Healthy Zone"))
+    )
+  ) |>
+  hc_add_series(
+    data = stock_data$SPR,
+    name = "SPR",
+    dataLabels = list(enabled = TRUE, format = "{point.y:.0%}"),
+    tooltip = list(valueDecimals = 2, valueSuffix = " SPR")
+  ) |>
+  hc_plotOptions(column = list(colorByPoint = TRUE)) |>
+  hc_colors(c("#4575b4", "#4575b4", "#4575b4")) |> # Use a consistent color for bars
+  hc_legend(enabled = FALSE)
+```
+
 
